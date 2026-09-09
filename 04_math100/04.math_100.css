@@ -75,11 +75,6 @@ input[type="number"].setting {
 
 @media print{
     .print_none{
-        opacity: 0;
+        display: none !important;
     }
-    
-    #problems {
-        margin-top: -100px;
-    }
-     
 }

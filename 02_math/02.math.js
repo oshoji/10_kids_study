@@ -15,6 +15,7 @@ function generateProblems() {
 
     let list = [];
     let retry = 0;
+    const usedKukuPairs = new Set(); // 九九(x2)の重複防止用。1〜9の全81通りを使い切ったら重複を許容する
     for (let i = 0; i < count; i++) {
         let seed = 0;
         let A, B, C;
@@ -45,7 +46,7 @@ function generateProblems() {
                     seed++;
                 } while (A == 0 | B == 0);
                 break;
-            case '×1':
+            case 'x1':
             do {
                 C = getRandomInt(min, max);
                 factors = [];
@@ -64,9 +65,14 @@ function generateProblems() {
               [A, B] = factors[Math.floor(Math.random() * factors.length)];
 
                break;
-            // case '×2':
-            // TODO:九九系なにかつくる
-            //     break;
+            case 'x2':
+                do {
+                    A = getRandomInt(1, 9);
+                    B = getRandomInt(1, 9);
+                } while (usedKukuPairs.has(A + '-' + B) && usedKukuPairs.size < 81);
+                usedKukuPairs.add(A + '-' + B);
+                C = A * B;
+                break;
             case '÷':
                 do {
                   B = getRandomInt(min, max);

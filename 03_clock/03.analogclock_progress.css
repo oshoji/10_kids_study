@@ -104,8 +104,14 @@ body {
     }
 
     .problem-row {
+        height: 58mm;      /* 5 x 58mm = 290mm <= 297mm (A4) */
+        padding: 6px 15mm;
         border-bottom: 1px solid #000;
         page-break-inside: avoid;
+    }
+
+    .problem-row:nth-child(5n+1):not(:first-child) {
+        page-break-before: always;
     }
 
     .time-input {

@@ -10,10 +10,22 @@
         td, th { border: 1px solid black; padding: 10px; text-align: center; }
         input { width: 50px; text-align: center; }
         button { margin-top: 10px; }
+        .op-symbol { font-weight: bold; }
+        .na-cell { color: #bbb; }
     </style>
 </head>
 <body>
-    <p><a href="../index.html">← メニューへ</a></p>
+    <p class="print_none"><a href="../index.html">← メニューへ</a></p>
+    <div id="settings" class="print_none">
+        <label for="operator">四則演算:</label>
+        <select id="operator">
+            <option value="+">たしざん</option>
+            <option value="-">ひきざん</option>
+            <option value="*">かけざん</option>
+            <option value="/">わりざん</option>
+        </select>
+        <button type="button" onclick="regenerate()">生成</button>
+    </div>
     <h1>100マス計算</h1>
     <table id="calcTable1"></table><br><br>
     <table id="calcTable2"></table>
@@ -41,14 +53,36 @@
   return Array.from(uniqueNumbers); // Setを配列に変換して返す
 }
 
-function generateTable(targetID) {
+function operatorSymbol(op) {
+    switch (op) {
+        case '+': return '+';
+        case '-': return '−';
+        case '*': return '×';
+        case '/': return '÷';
+        default: return '';
+    }
+}
+
+function computeAnswer(op, rowNum, colNum) {
+    switch (op) {
+        case '+': return rowNum + colNum;
+        case '-': return Math.abs(rowNum - colNum);
+        case '*': return rowNum * colNum;
+        case '/': return (rowNum % colNum === 0) ? rowNum / colNum : null;
+        default: return null;
+    }
+}
+
+function generateTable(targetID, op) {
     let table = document.getElementById(targetID);
     // let numbers = [...Array(r)].map(() => Math.floor(Math.random() * (20 - 1 + 1)) + 1);
     let numbers = generateUniqueRandomNumbers(r, 1, 20);
     console.log(numbers);
 
     let headerRow = table.insertRow();
-    headerRow.insertCell();
+    let cornerCell = headerRow.insertCell();
+    cornerCell.textContent = operatorSymbol(op);
+    cornerCell.classList = "op-symbol";
     numbers.forEach(num => {
         let cell = headerRow.insertCell();
         cell.textContent = num;
@@ -61,11 +95,17 @@ function generateTable(targetID) {
         cell.textContent = rowNum -1;
         numbers.forEach(colNum => {
             let inputCell = row.insertCell();
-            let input = document.createElement("input");
-            input.type = "number";
-            input.classList = "box";
-            input.dataset.answer = rowNum + colNum;
-            inputCell.appendChild(input);
+            const answer = computeAnswer(op, rowNum, colNum);
+            if (answer === null) {
+                inputCell.textContent = "—";
+                inputCell.classList = "na-cell";
+            } else {
+                let input = document.createElement("input");
+                input.type = "number";
+                input.classList = "box";
+                input.dataset.answer = answer;
+                inputCell.appendChild(input);
+            }
         });
     }
     });
@@ -94,10 +134,17 @@ function generateTable(targetID) {
             //document.getElementById("result").textContent = `正解数: ${correct} / 100`;
         }
 
-        generateTable("calcTable1");
-        generateTable("calcTable1");
-        generateTable("calcTable2");
-        generateTable("calcTable2");
+        function regenerate() {
+            const op = document.getElementById("operator").value;
+            document.getElementById("calcTable1").innerHTML = "";
+            document.getElementById("calcTable2").innerHTML = "";
+            generateTable("calcTable1", op);
+            generateTable("calcTable1", op);
+            generateTable("calcTable2", op);
+            generateTable("calcTable2", op);
+        }
+
+        regenerate();
     </script>
 </body>
 </html>

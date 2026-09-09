@@ -10,7 +10,8 @@
 
 </head>
 <body>
-    <p class="print_none"><a href="../index.html">← メニューへ</a></p>
+    <p class="print_none"><a href="../index.html" class="back-link">← メニューへ</a></p>
+    <h1 class="print_none">数式問題生成器</h1>
     <form id="form" class="print_none">
         <label for="min">数値範囲:</label>
         <input type="number" id="min" name="min" required placeholder="min" value="2" class="setting">～
@@ -23,8 +24,8 @@
         <select id="operator" name="operator" required>
             <option value="+">たしざん</option>
             <option value="-">ひきざん</option>
-            <option value="×1">かけざん</option>
-            <option value="×2">かけざん(九九) 未実装</option>
+            <option value="x1">かけざん</option>
+            <option value="x2">かけざん(九九)</option>
             <option value="÷">わりざん</option>
         </select>&nbsp;&nbsp;
 
@@ -40,8 +41,8 @@
             <option value="ABC">ランダム</option>
         </select>&nbsp;&nbsp;
 
-<button type="button" onclick="generateProblems()" tabindex="1">生成</button>&nbsp;&nbsp;
-<button type="button" onclick="checkAnswers()">正誤判定</button>&nbsp;&nbsp;
+<button type="button" class="btn btn-primary" onclick="generateProblems()" tabindex="1">生成</button>&nbsp;&nbsp;
+<button type="button" class="btn btn-success" onclick="checkAnswers()">正誤判定</button>&nbsp;&nbsp;
     </form>
 
     <div id="problems"></div>

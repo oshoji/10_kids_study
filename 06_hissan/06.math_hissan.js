@@ -10,16 +10,25 @@ function randDigitNum(d) {
 
 let answers = [];
 
+function hissanRow(text, opCell, numDigits) {
+  const digits = String(text).padStart(numDigits, " ").split("");
+  const opTd = `<td class="hissan-op-cell">${opCell}</td>`;
+  const digitTds = digits.map(d => `<td>${d === " " ? "" : d}</td>`).join("");
+  return `<tr>${opTd}${digitTds}</tr>`;
+}
+
 function createVerticalHTML(op, a, b, idx) {
-  const width = Math.max(String(a).length, String(b).length) + 2;
+  const numDigits = Math.max(String(a).length, String(b).length);
+  const totalCols = numDigits + 1;
+  const totalWidthEm = (0.9 + numDigits * 1.1).toFixed(2); // .hissan-table の列幅(op:0.9em, 桁:1.1em)と合わせる
   return `
     <div class="problem-container">
-      <div class="flex flex-col items-end">
-        <div style="min-width:${width}ch" class="text-right">${a}</div>
-        <div style="min-width:${width}ch" class="text-right">${op} ${b}</div>
-        <hr class="border-t-2 border-gray-600 w-full my-1" />
-        <input id="ans-${idx}" type="text" style="width:${width}ch" class="border p-1 text-right" />
-      </div>
+      <table class="hissan-table">
+        ${hissanRow(a, "", numDigits)}
+        ${hissanRow(b, op, numDigits)}
+        <tr><td colspan="${totalCols}"><hr class="border-t-4 border-gray-600 my-2" /></td></tr>
+      </table>
+      <input id="ans-${idx}" type="text" style="width:${totalWidthEm}em" class="border-2 p-2 text-right" />
     </div>`;
 }
 
@@ -43,8 +52,14 @@ function generateProblems() {
       b = b === 0 ? 1 : b;
       const q = randInt(1, Math.floor(max / b));
       a = b * q;
-    } else if (op === "-" && a < b) {
-      [a, b] = [b, a];
+    } else if (op === "-") {
+      // 第1数(a)＞第2数(b)を維持する。桁数指定がある場合はそれぞれの桁数の範囲内で再抽選する
+      let guard = 0;
+      while (a <= b && guard < 100) {
+        a = digitsA ? randDigitNum(digitsA) : randInt(min, max);
+        b = digitsB ? randDigitNum(digitsB) : randInt(min, max);
+        guard++;
+      }
     }
 
     container.innerHTML += createVerticalHTML(op, a, b, i);
@@ -79,4 +94,5 @@ function checkAnswers() {
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("generate").addEventListener("click", generateProblems);
   document.getElementById("check").addEventListener("click", checkAnswers);
+  generateProblems();
 });
