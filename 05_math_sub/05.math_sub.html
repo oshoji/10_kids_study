@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>算数の文章問題ジェネレーター</title>
+  <style>
+    body {
+      font-family: "Yu Gothic", sans-serif;
+      padding: 20px;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label, input, button {
+      font-size: 16px;
+      margin: 5px;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .problem-sheet {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px 20px;
+    }
+
+    .problem {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 7px;
+      font-size: 14px;
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .answer-box {
+      margin-top: 10px;
+    }
+
+    .answer-line {
+      display: inline-block;
+      border-bottom: 2px solid #333;
+      width: 100px;
+      height: 24px;
+      vertical-align: bottom;
+      margin-left: 10px;
+    }
+
+    .circle-label {
+      font-weight: bold;
+    }
+
+    .underline {
+      display: inline-block;
+      border-bottom: 1px solid #333;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    @media print {
+      .controls {
+        display: none;
+      }
+
+      h1 {
+        display: none;
+      }
+
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .problem {
+        page-break-inside: avoid;
+      }
+
+      .problem-sheet {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <p class="controls"><a href="../index.html">← メニューへ</a></p>
+  <h1>算数の文章問題</h1>
+
+  <div class="controls">
+    <label for="count">問題数：</label>
+    <input type="number" id="count" value="20" min="1" max="30">
+
+    <label for="walletMin">おサイフの最小金額：</label>
+    <input type="number" id="walletMin" value="40" min="0" step="10">
+
+    <label for="walletMax">おサイフの最大金額：</label>
+    <input type="number" id="walletMax" value="90" min="100" step="10">
+
+    <label for="maxQuantity">購入個数の最大：</label>
+    <input type="number" id="maxQuantity" value="6" min="1" max="10">
+
+    <button onclick="generateProblems()">生成</button>
+  </div>
+
+  <div id="problems" class="problem-sheet"></div>
+
+  <script>
+    const names = ["けんた", "さくら", "たくみ", "まな", "そうた", "りこ", "はると", "あおい", "なつみ", "しょうじ", "てるき", "さく", "ことね", "かのん","まな","せんせい","おかあさん","ぜん",""];
+    const items = ["りんご", "チョコレート", "あめ", "えんぴつ", "ノート", "けしゴム", "クッキー", "グミ", "おかし", "パン", "ケーキ", "ピザ", "おもちゃ", "ふく","かきこおり","くじびき","えほん","ボール","おはな"];
+
+    function getRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateProblems() {
+      const count = parseInt(document.getElementById('count').value);
+      const walletMax = parseInt(document.getElementById('walletMax').value);
+      const walletMin = parseInt(document.getElementById('walletMin').value);
+      const maxQuantity = parseInt(document.getElementById('maxQuantity').value);
+
+      const container = document.getElementById('problems');
+      container.innerHTML = '';
+
+      let generated = 0;
+      while (generated < count) {
+        const name = getRandom(names);
+        const item = getRandom(items);
+        const unitPrice = Math.floor(Math.floor(Math.random() * 100 + 1)/2)+1;
+        const quantity = Math.floor(Math.random() * maxQuantity) + 1;
+        const total = unitPrice * quantity; 
+
+        let minWallet = Math.max(total, walletMin);
+        let maxWallet = walletMax;
+
+        if (minWallet > maxWallet) continue; // 条件に合わない場合、スキップして再生成
+
+        const wallet = Math.floor((Math.random() * ((maxWallet - minWallet) / 10 + 1))) * 10 + minWallet;
+
+        const problemHTML = `
+          <div class="problem">
+            <div>
+              ${name} さん は <span class="underline">${wallet}</span>えん もっています。<br>
+              <span class="underline">${unitPrice}</span>えんの ${item}を <span class="underline">${quantity}</span>こ かいました。<br>
+              のこっている おかね は いくらでしょうか？
+            </div>
+            <div class="answer-box">
+              <span class="circle-label">こたえ：</span>
+              <span class="answer-line"></span>
+            </div>
+          </div>
+        `;
+        container.innerHTML += problemHTML;
+        generated++;
+      }
+    }
+
+    window.onload = generateProblems;
+  </script>
+</body>
+</html>

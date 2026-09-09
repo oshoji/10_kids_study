@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>時計の学習プリント（経過時間）</title>
+  <link rel="stylesheet" href="./03.analogclock_progress.css">
+</head>
+<body>
+
+<p class="print_none"><a href="../index.html">← メニューへ</a></p>
+<div id="settings" class="print_none">
+  <div class="setting-item">
+    <label>問題数:</label>
+    <input type="number" id="clock-count" value="8" min="1" max="10">
+  </div>
+  <div class="setting-item">
+    <label>単位(分):</label>
+    <select id="minute-unit">
+      <option value="1">1分</option>
+      <option value="5" selected>5分</option>
+      <option value="10">10分</option>
+    </select>
+  </div>
+  <div class="setting-item">
+    <label>問題:</label>
+    <select id="minutes-after-selection">
+      <option value="99">ランダム</option>
+      <option value="10">10分後</option>
+      <option value="15">15分後</option>
+      <option value="20">20分後</option>
+      <option value="30">30分後</option>
+      <option value="45">45分後</option>
+      <option value="60">60分後</option>
+    </select>
+  </div>
+  <div class="setting-btn">
+    <button type="button" class="btn-primary" onclick="generateClocks()">問題を更新</button>
+    <button type="button" class="btn-success" onclick="checkAllAnswers()">答え合わせ</button>
+    <button type="button" onclick="window.print()">印刷</button>
+  </div>
+</div>
+
+<div id="clock-container"></div>
+
+<script src="./03.analogclock_progress.js"></script>
+<script>
+    window.onload = generateClocks;
+</script>
+</body>
+</html>

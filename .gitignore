@@ -1,0 +1,6 @@
+# 未使用・旧GAS版のバックアップ(公開サイトには含めない)
+_archive/
+
+# OS
+Thumbs.db
+.DS_Store

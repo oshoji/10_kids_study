@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>きっずスタディ</title>
+    <style>
+        body {
+            font-family: "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #ccc;
+            min-height: 80px;
+        }
+
+        .menu a:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>きっずスタディ</h1>
+    <div class="menu">
+        <a href="./01_hiragana/01.pokemon_hiragana.html">ポケモンひらがな練習</a>
+        <a href="./02_math/02.math.html">計算問題ジェネレーター</a>
+        <a href="./03_clock/03.analogclock_time.html">アナログ時計 学習プリント</a>
+        <a href="./03_clock/03.analogclock_progress.html">時計の学習プリント(経過時間)</a>
+        <a href="./04_math100/04.math_100.html">100マス計算</a>
+        <a href="./05_math_sub/05.math_sub.html">算数の文章問題ジェネレーター</a>
+        <a href="./06_hissan/06.math_hissan.html">筆算ドリル</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Analog Clock</title>
+  <link rel="stylesheet" href="./03.analogclock.css">
+  <script src='./03.analogclock.js'></script>
+</head>
+<body>
+
+<div id="settings" class="print_none">
+  <label for="clock-count">時計数:</label>
+  <input type="number" id="clock-count" value="9">
+
+  <label for="show-seconds">秒針:</label>
+  <input type="checkbox" id="show-seconds">
+
+  <label for="minute-unit">単位(分):</label>
+  <select id="minute-unit">
+    <option value="1">1分</option>
+    <option value="5" selected>5分</option>
+    <option value="10">10分</option>
+    <option value="15">15分</option>
+  </select>
+
+  <label for="image-unit">補助:</label>
+  <select id="image-unit">
+    <option value="0">なし</option>
+    <option value="1" selected>あり</option>
+  </select>
+  <button type="button" onclick="generateClocks()">生成</button>
+</div>
+
+<div id="clock-container"></div>
+
+</body>
+<script>generateClocks();</script>
+</html>

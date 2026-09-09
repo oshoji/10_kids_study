@@ -1,0 +1,48 @@
+/* ======== 共通 ======== */
+.problem-container {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-family: monospace;
+}
+
+/* 固定4段組みグリッド */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* ======== 印刷時 ======== */
+@media print {
+  body {
+    background: white;
+  }
+
+  #settings,
+  #generate,
+  #check {
+    display: none !important;
+  }
+
+  .problem-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 1.5rem !important;
+    font-size: 1.6rem;
+  }
+
+  .problem-container {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  input {
+    border: 1px solid #999;
+    padding: 0.2rem;
+    font-size: 1.2rem;
+    width: 100%;
+  }
+}

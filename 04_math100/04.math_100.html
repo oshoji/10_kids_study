@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>100マス計算</title>
+    <link rel="stylesheet" href="./04.math_100.css">
+    <style>
+        table { border-collapse: collapse; margin: 20px 0; }
+        td, th { border: 1px solid black; padding: 10px; text-align: center; }
+        input { width: 50px; text-align: center; }
+        button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <p><a href="../index.html">← メニューへ</a></p>
+    <h1>100マス計算</h1>
+    <table id="calcTable1"></table><br><br>
+    <table id="calcTable2"></table>
+    <!-- <button onclick="checkAnswers()">採点</button> -->
+    <p id="result"></p>
+
+    <script>
+        let r = 7;
+        let c = 10;
+
+        function generateUniqueRandomNumbers(count, min, max) {
+  if (count > (max - min + 1)) {
+    console.warn("警告: 生成するユニークな数値の数が、指定された範囲の数値の総数を超えています。");
+    // またはエラーをスローする
+    // throw new Error("生成可能なユニークな数値の数を超えました。");
+  }
+
+  const uniqueNumbers = new Set(); // 重複しない数値を格納するためのSet
+
+  while (uniqueNumbers.size < count) {
+    const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+    uniqueNumbers.add(randomNumber); // 重複していなければ追加される
+  }
+
+  return Array.from(uniqueNumbers); // Setを配列に変換して返す
+}
+
+function generateTable(targetID) {
+    let table = document.getElementById(targetID);
+    // let numbers = [...Array(r)].map(() => Math.floor(Math.random() * (20 - 1 + 1)) + 1);
+    let numbers = generateUniqueRandomNumbers(r, 1, 20);
+    console.log(numbers);
+
+    let headerRow = table.insertRow();
+    headerRow.insertCell();
+    numbers.forEach(num => {
+        let cell = headerRow.insertCell();
+        cell.textContent = num;
+    });
+
+    numbers.forEach((rowNum,index) => {
+        if (index < 6){
+        let row = table.insertRow();
+        let cell = row.insertCell();
+        cell.textContent = rowNum -1;
+        numbers.forEach(colNum => {
+            let inputCell = row.insertCell();
+            let input = document.createElement("input");
+            input.type = "number";
+            input.classList = "box";
+            input.dataset.answer = rowNum + colNum;
+            inputCell.appendChild(input);
+        });
+    }
+    });
+
+    let lastHeaderRow = table.insertRow();
+    let combinedCell = lastHeaderRow.insertCell();
+    combinedCell.textContent = "";
+    // ここでcolspanを設定する例
+    // numbers.length は numbers 配列の要素数
+    // +1 は、左端の行番号/空のセルに対応
+    combinedCell.colSpan = numbers.length + 1; // 全ての列（numbersの数 + 最初の空/行番号セル）を結合
+    // この行にはこれ以上セルを追加しません
+}
+
+        function checkAnswers() {
+            let inputs = document.querySelectorAll("#calcTable input");
+            let correct = 0;
+            inputs.forEach(input => {
+                if (parseInt(input.value) === parseInt(input.dataset.answer)) {
+                    correct++;
+                    input.style.backgroundColor = "lightgreen";
+                } else {
+                    input.style.backgroundColor = "lightcoral";
+                }
+            });
+            //document.getElementById("result").textContent = `正解数: ${correct} / 100`;
+        }
+
+        generateTable("calcTable1");
+        generateTable("calcTable1");
+        generateTable("calcTable2");
+        generateTable("calcTable2");
+    </script>
+</body>
+</html>

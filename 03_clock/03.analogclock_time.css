@@ -1,0 +1,96 @@
+body {
+  -webkit-print-color-adjust: exact;
+  margin: 0;
+  padding: 0;
+  font-family: "Sawarabi Gothic", sans-serif; /* 学習用に見やすいフォント */
+}
+
+#settings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #eee;
+}
+
+#clock-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 210mm; /* A4横幅 */
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 5mm;
+}
+
+/* 9問を3x3で収めるための設定 */
+.clock-card {
+  width: 32%; /* 3列 */
+  height: 90mm; /* 3行で約270mm（A4は297mmなので余白を含めて収まる） */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 5px;
+  border: 1px dashed #ccc; /* 裁断目安（不要ならnoneに） */
+}
+
+.clock0, .clock1 {
+  width: 55mm; /* 時計のサイズを固定 */
+  height: 55mm;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.clock0 { background-image: url("./clock0.png"); }
+.clock1 { background-image: url("./clock1.png"); }
+
+.clock-input {
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.input-row {
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.clock-input input {
+  width: 35px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.target-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: #0000ff;
+  margin: 5px 0;
+}
+
+.ans-hint {
+  font-size: 12px;
+  color: #d00;
+  visibility: hidden;
+}
+
+/* 印刷用設定 */
+@media print {
+  .print_none { display: none !important; }
+  body { margin: 0; }
+  #clock-container {
+    margin: 0;
+    padding: 0;
+    gap: 0; /* 隙間を詰める */
+  }
+  .clock-card {
+    border: none; /* 印刷時は枠線を消す */
+    page-break-inside: avoid;
+  }
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>筆算ドリル</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./06.math_hissan.css">
+</head>
+<body class="bg-gray-100 p-6 max-w-screen-xl mx-auto">
+  <p class="mb-4"><a href="../index.html" class="text-blue-600 underline">← メニューへ</a></p>
+  <h1 class="text-3xl font-bold mb-6">筆算ドリル</h1>
+
+  <div id="settings" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div>
+      <label class="block mb-1">演算子</label>
+      <select id="operator" class="border p-2 w-full">
+        <option value="+">足し算 (+)</option>
+        <option value="-">引き算 (-)</option>
+        <option value="*">掛け算 (×)</option>
+        <option value="/">割り算 (÷)</option>
+      </select>
+    </div>
+    <div>
+      <label class="block mb-1">問題数</label>
+      <input id="count" type="number" min="1" value="8" class="border p-2 w-full" />
+    </div>
+    <div>
+      <label class="block mb-1">最小値</label>
+      <input id="min" type="number" value="1" class="border p-2 w-full" />
+    </div>
+    <div>
+      <label class="block mb-1">最大値</label>
+      <input id="max" type="number" value="999" class="border p-2 w-full" />
+    </div>
+    <div>
+      <label class="block mb-1">第1数の桁数</label>
+      <input id="digitsA" type="number" min="1" placeholder="例: 2" class="border p-2 w-full" />
+    </div>
+    <div>
+      <label class="block mb-1">第2数の桁数</label>
+      <input id="digitsB" type="number" min="1" placeholder="例: 3" class="border p-2 w-full" />
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <button id="generate" class="bg-blue-600 text-white px-4 py-2 rounded shadow">問題を生成</button>
+    <button id="check" class="bg-green-600 text-white px-4 py-2 rounded shadow ml-2 hidden">答え合わせ</button>
+  </div>
+
+  <!-- 常に4列表示 -->
+  <div id="problems" class="problem-grid mt-8"></div>
+
+  <script src='./06.math_hissan.js'></script>
+</body>
+</html>

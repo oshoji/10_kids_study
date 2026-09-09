@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+#kana {
+    font-size: 200px;
+    font-weight: bold;
+    opacity: 1;
+    transition: opacity 1s;
+}
+#pokemon {
+    
+    /* transition: opacity 3s; */
+      /* 2秒かけて不透明度を変化 */
+    width: 200px;
+    height: 200px;
+}
+#pokemon img.show {
+    opacity: 1;
+    /* visibility: visible; */
+}
+#pokemon img.hide {
+    opacity: 0;
+    /* visibility: hidden; */
+}
+

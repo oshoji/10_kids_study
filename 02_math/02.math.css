@@ -1,0 +1,88 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#problems {
+    width: 100%;
+    margin: 0 auto;
+
+    display: flex;
+    flex-wrap: wrap; /* 複数行になる場合、次の行に折り返す */
+    gap: 10px; /* 各要素の間に余白を追加 */
+}
+
+.problem {
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px; */
+
+    flex: 1 1 45%; /* 45%の幅で2列表示にする */
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: 1px solid #e7e5e5; /* 枠線で問題を囲む */
+    /*padding: 10px;*/
+    padding: 1px 1px 1px 1px;
+}
+
+.problem span,
+.problem input[type="number"] {
+    display: inline-block;
+    width: 60px; /* 各要素の幅を固定 */
+    text-align: center;
+}
+
+.problem input[type="number"] {
+    width: 50px; /* 4桁分の幅 */
+    margin: 0 5px;
+}
+
+
+button {
+    margin-top: 20px;
+}
+
+input[type="number"].box {
+    width: 50px; /* テキストボックスの幅 */
+    height: 20px; /* テキストボックスの高さ */
+    padding: 10px; /* 内側の余白を大きくしてテキストに余裕を持たせる */
+    /*border: 3px solid #000;*/ /* 太めの黒い枠線 */
+    border-radius: 0; /* 角を丸くせず、四角形にする */
+    font-size: 20px; /* テキストサイズ */
+}
+
+input[type="number"].setting {
+    width: 50px; /* テキストボックスの幅 */
+    height: 20px; /* テキストボックスの高さ */
+    padding: 6px; /* 内側の余白を大きくしてテキストに余裕を持たせる */
+}
+
+.problem .no-border {
+    border: none;
+}
+.problem:not(input) {
+    font-size: 35px;
+}
+
+@media print{
+    .print_none{
+        opacity: 0;
+        page-break-inside: avoid;
+        page-break-after: avoid;
+        page-break-before: avoid;
+    }
+    
+    #problems {
+        margin-top: -95px;
+    }
+     
+}

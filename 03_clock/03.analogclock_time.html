@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>アナログ時計 学習プリント</title>
+  <link rel="stylesheet" href="./03.analogclock_time.css">
+</head>
+<body>
+
+<p class="print_none"><a href="../index.html">← メニューへ</a></p>
+<div id="settings" class="print_none">
+  <label for="clock-count">時計数:</label>
+  <input type="number" id="clock-count" value="9">
+
+  <label for="show-seconds">秒針:</label>
+  <input type="checkbox" id="show-seconds">
+
+  <label for="minute-unit">単位(分):</label>
+  <select id="minute-unit">
+    <option value="1">1分</option>
+    <option value="5" selected>5分</option>
+    <option value="10">10分</option>
+  </select>
+
+  <label for="image-unit">補助:</label>
+  <select id="image-unit">
+    <option value="0">なし</option>
+    <option value="1" selected>あり</option>
+  </select>
+
+  <label for="minutes-after-selection">問題:</label>
+  <select id="minutes-after-selection">
+      <option value="99">ランダム</option>
+      <option value="10">10分後</option>
+      <option value="20">20分後</option>
+      <option value="30">30分後</option>
+      <option value="60">60分後</option>
+  </select>
+
+  <button type="button" onclick="generateClocks()">問題を更新</button>
+  <button type="button" onclick="toggleAnswers()">答えを表示</button>
+</div>
+
+<div id="clock-container"></div>
+
+<script src="./03.analogclock_time.js"></script>
+<script>
+    generateClocks();
+</script>
+</body>
+</html>

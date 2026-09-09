@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Analog Clock</title>
+  <link rel="stylesheet" href="./03.analogclock.css">
+  <script src='./03.analogclock-input.js'></script>
+</head>
+<body>
+<p>キャプチャ用</p> 
+<div id="settings" class="print_none">
+  <input type="number" id="clock-hour" value="9">
+  <label for="clock-count">時:</label>
+
+  <input type="number" id="clock-minute" value="0">
+  <label for="clock-count">分:</label>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <button type="button" onclick="generateClocks()">生成</button>
+</div>
+
+<div id="clock-container"></div>
+
+</body>
+<script>generateClocks();</script>
+</html>
