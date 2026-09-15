@@ -35,6 +35,19 @@
   width: 0.9em;
 }
 
+/* 足し算・引き算の解答欄。桁ごとに1文字入力できるボックスを右寄せで並べる */
+.hissan-answer-digits {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hissan-digit-input {
+  width: 1.1em;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: inherit;
+}
+
 /* ======== 印刷時 ======== */
 @media print {
   body {

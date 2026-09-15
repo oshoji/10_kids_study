@@ -17,6 +17,8 @@
       <option value="-">引き算 (-)</option>
       <option value="*">掛け算 (×)</option>
       <option value="/">割り算 (÷)</option>
+      <option value="+blank">足し算（虫食い）</option>
+      <option value="-blank">引き算（虫食い）</option>
     </select>
 
     <label for="count">問題数:</label>
@@ -32,6 +34,9 @@
 
     <label for="digitsB">第2数の桁数:</label>
     <input id="digitsB" type="number" min="1" placeholder="例: 3" class="border rounded px-1 py-0.5 w-16" />
+
+    <label for="blankCount">虫食い数:</label>
+    <input id="blankCount" type="number" min="1" value="3" class="border rounded px-1 py-0.5 w-16" />
 
     <button id="generate" class="bg-blue-600 text-white px-3 py-1 rounded shadow">生成</button>
     <button id="check" class="bg-green-600 text-white px-3 py-1 rounded shadow hidden">正誤判定</button>
