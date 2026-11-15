@@ -1,6 +1,5 @@
 const MARK_RE = /\[([^|\]]+)\|([^\]]+)\]/g;
 const isKanji = ch => /\p{Script=Han}/u.test(ch);
-const CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚";
 
 // かん字 → 行 の対応表
 const KANJI_TO_GROUP = {};
@@ -76,7 +75,7 @@ function renderSheet(problems, showAnswer, extraClass = "") {
       const body = parts
         .map(p => (p.type === "text" ? escapeHTML(p.text) : renderMark(p, showAnswer)))
         .join("");
-      return `<div class="problem"><div class="problem-no">${CIRCLED[i] || i + 1}</div><div class="problem-text">${body}</div></div>`;
+      return `<div class="problem"><div class="problem-no">(${i + 1})</div><div class="problem-text">${body}</div></div>`;
     })
     .join("");
 
@@ -107,7 +106,7 @@ function render() {
 }
 
 function generate() {
-  const count = Math.max(1, Math.min(30, +document.getElementById("count").value || 10));
+  const count = Math.max(1, +document.getElementById("count").value || 10);
   const mode = document.getElementById("mode").value;
   const selected = new Set(
     [...document.querySelectorAll("#groups input:checked")].map(el => el.value)
