@@ -1,0 +1,166 @@
+/* 教科書に近い字形のフォントを優先する */
+.sheet {
+  font-family: "UD デジタル 教科書体 N-R", "UD Digi Kyokasho N-R", "Yu Kyokasho", "YuKyokasho", "Klee One",
+    "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+}
+
+.sheet-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sheet-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sheet-fields {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.field-line {
+  display: inline-block;
+  border-bottom: 1px solid #333;
+  min-width: 3em;
+}
+
+.field-line.name {
+  min-width: 9em;
+}
+
+.sheet-note {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 0.25rem;
+}
+
+.problem {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 26px;
+  line-height: 3.1;
+  padding: 0.2rem 0;
+  border-bottom: 1px dashed #bbb;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.problem-no {
+  flex: none;
+  width: 1.6em;
+  font-weight: bold;
+}
+
+.problem-text {
+  flex: 1;
+}
+
+ruby {
+  ruby-position: over;
+}
+
+ruby rt {
+  font-size: 0.5em;
+  line-height: 1;
+}
+
+/* 読み問題: かん字の上に、よみがなを書く空らん */
+.q-yomi rb,
+.q-yomi > .base {
+  border-bottom: 2px solid #333;
+}
+
+.q-yomi rt {
+  font-size: 0.6em;
+}
+
+.yomi-box {
+  display: inline-block;
+  height: 1.7em;
+  border: 1.5px solid #333;
+  border-radius: 3px;
+  vertical-align: bottom;
+  text-align: center;
+  line-height: 1.7em;
+  margin-bottom: 0.15em;
+}
+
+/* 書き問題: よみがなの下に、かん字を書くマス */
+.kanji-box {
+  display: inline-block;
+  width: 1.35em;
+  height: 1.35em;
+  line-height: 1.35em;
+  border: 2px solid #333;
+  vertical-align: middle;
+  text-align: center;
+  margin: 0 1px;
+  background-image:
+    linear-gradient(to right, transparent calc(50% - 0.5px), #ccc calc(50% - 0.5px), #ccc calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom, transparent calc(50% - 0.5px), #ccc calc(50% - 0.5px), #ccc calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+
+.answer {
+  color: #dc2626;
+  font-weight: bold;
+}
+
+.kanji-box.answer {
+  background-image: none;
+}
+
+.print-only {
+  display: none;
+}
+
+/* ======== 印刷時 ======== */
+@media print {
+  body {
+    background: white;
+    padding: 0 !important;
+  }
+
+  .print_none,
+  #settings {
+    display: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  .problem {
+    font-size: 20pt;
+    line-height: 2.9;
+  }
+
+  .sheet-header {
+    flex-wrap: nowrap;
+  }
+
+  .print-only {
+    display: block;
+  }
+
+  .answer-sheet {
+    margin-top: 0;
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* 「こたえのページもいんさつする」がオフのとき */
+  body.no-answer-print .answer-sheet {
+    display: none !important;
+  }
+}

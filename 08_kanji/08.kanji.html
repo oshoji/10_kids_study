@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2年生 かん字の読み書き</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./08.kanji.css">
+</head>
+<body class="bg-white p-6 max-w-screen-lg mx-auto">
+  <p class="print_none mb-4"><a href="../index.html" class="text-blue-600 underline">← メニューへ</a></p>
+  <h1 class="print_none text-3xl font-bold mb-6">2年生 かん字の読み書きプリント</h1>
+
+  <div id="settings" class="print_none flex flex-col gap-3 mb-6 text-sm">
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <label for="count">問題数:</label>
+      <input id="count" type="number" min="1" max="30" value="10" class="border rounded px-1 py-0.5 w-16" />
+
+      <label for="mode">出題:</label>
+      <select id="mode" class="border rounded px-1 py-0.5">
+        <option value="mix">読み・書きをまぜる</option>
+        <option value="yomi">読みだけ</option>
+        <option value="kaki">書きだけ</option>
+      </select>
+
+      <label class="flex items-center gap-1">
+        <input id="answerPage" type="checkbox" checked />
+        こたえのページもいんさつする
+      </label>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <span>かん字のはんい（音読み）:</span>
+      <div id="groups" class="flex flex-wrap gap-x-3 gap-y-1"></div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button id="generate" class="bg-blue-600 text-white px-3 py-1 rounded shadow">生成</button>
+      <button id="toggleAnswer" class="bg-green-600 text-white px-3 py-1 rounded shadow">こたえを見る</button>
+      <button id="print" class="bg-gray-600 text-white px-3 py-1 rounded shadow">いんさつ</button>
+    </div>
+  </div>
+
+  <div id="sheets"></div>
+
+  <script src="./08.kanji_data.js"></script>
+  <script src="./08.kanji.js"></script>
+</body>
+</html>

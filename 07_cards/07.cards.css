@@ -1,0 +1,102 @@
+/* ======== 設定パネル ======== */
+/* モードselectと値select/inputの組を枠で囲み、相関があることを視覚的に示す */
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  border: 1px solid #e0e0e0;
+  background: #fafafa;
+  border-radius: 0.4rem;
+  padding: 0.35rem 0.5rem;
+}
+
+.option-group-label {
+  font-size: 0.72rem;
+  color: #666;
+  font-weight: bold;
+}
+
+/* ======== 共通 ======== */
+.problem-container {
+  background: white;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 280px;
+}
+
+.problem-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.card-row {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.card-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2.6rem;
+  border: 2px solid #333;
+  border-radius: 0.3rem;
+  font-family: monospace;
+  font-size: 1.3rem;
+  font-weight: bold;
+  background: #fffdf5;
+}
+
+.question-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.answer-input {
+  width: 100%;
+}
+
+/* ======== 印刷時 ======== */
+@media print {
+  body {
+    background: white;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .print_none,
+  #settings,
+  #generate,
+  #check {
+    display: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+
+  .problem-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    margin-top: 0 !important;
+  }
+
+  .problem-container {
+    width: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    box-shadow: none;
+  }
+
+  input {
+    border: 1px solid #999;
+    padding: 0.3rem;
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>数字カード並べ替え問題</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./07.cards.css">
+</head>
+<body class="bg-white p-6 max-w-screen-xl mx-auto">
+  <p class="print_none mb-4"><a href="../index.html" class="text-blue-600 underline">← メニューへ</a></p>
+  <h1 class="print_none text-3xl font-bold mb-6">数字カード並べ替え問題</h1>
+
+  <div id="settings" class="print_none flex flex-wrap items-end gap-x-3 gap-y-2 mb-6 text-sm">
+    <div class="option-group">
+      <label for="patternMode" class="option-group-label">出題パターン</label>
+      <select id="patternMode" class="border rounded px-1 py-0.5 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed">
+        <option value="rank">○番目に大きい/小さい数</option>
+        <option value="threshold">指定数値より大きい/小さいパターン数</option>
+        <option value="mix" selected>ランダム混在</option>
+      </select>
+    </div>
+
+    <div class="option-group">
+      <label for="count" class="option-group-label">問題数</label>
+      <input id="count" type="number" min="1" value="8" class="border rounded px-1 py-0.5 w-16" />
+    </div>
+
+    <div class="option-group">
+      <span class="option-group-label">カード枚数</span>
+      <div class="flex gap-1">
+        <select id="cardCountMode" class="border rounded px-1 py-0.5 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed">
+          <option value="fixed">固定</option>
+          <option value="random" selected>ランダム(3〜7)</option>
+        </select>
+        <select id="cardCountValue" class="border rounded px-1 py-0.5 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed">
+          <option value="3">3枚</option>
+          <option value="4" selected>4枚</option>
+          <option value="5">5枚</option>
+          <option value="6">6枚</option>
+          <option value="7">7枚</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="option-group">
+      <span class="option-group-label">使用枚数</span>
+      <div class="flex items-center gap-1">
+        <select id="useAllMode" class="border rounded px-1 py-0.5 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed">
+          <option value="all">全カード使用</option>
+          <option value="partial">一部カード使用</option>
+          <option value="random" selected>ランダム</option>
+        </select>
+        <span class="text-xs text-gray-500">一部使用時:</span>
+        <input id="useCountValue" type="number" min="2" value="3" class="border rounded px-1 py-0.5 w-14 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed" />
+        <span class="text-xs text-gray-500">枚</span>
+      </div>
+    </div>
+
+    <div class="option-group">
+      <label for="zeroMode" class="option-group-label">「0」を含む</label>
+      <select id="zeroMode" class="border rounded px-1 py-0.5 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed">
+        <option value="exclude">含めない</option>
+        <option value="include">含める</option>
+        <option value="random" selected>ランダム</option>
+      </select>
+    </div>
+
+    <div class="option-group">
+      <label for="dupMode" class="option-group-label">同じ数字を含む</label>
+      <select id="dupMode" class="border rounded px-1 py-0.5 disabled:bg-gray-200 disabled:text-gray-400 disabled:border-gray-300 disabled:cursor-not-allowed">
+        <option value="exclude">含めない</option>
+        <option value="include">含める</option>
+        <option value="random" selected>ランダム</option>
+      </select>
+    </div>
+
+    <div class="option-group">
+      <label for="randomizeAll" class="option-group-label flex items-center gap-1">
+        <input id="randomizeAll" type="checkbox" checked />
+        すべてランダム
+      </label>
+    </div>
+
+    <button id="generate" class="bg-blue-600 text-white px-3 py-1 rounded shadow h-8">生成</button>
+    <button id="check" class="bg-green-600 text-white px-3 py-1 rounded shadow hidden h-8">正誤判定</button>
+  </div>
+
+  <div id="problems" class="problem-grid mt-8"></div>
+
+  <script src="./07.cards.js"></script>
+</body>
+</html>
